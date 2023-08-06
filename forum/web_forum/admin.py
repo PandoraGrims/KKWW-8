@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from webapp.models import Task, Type, Status, Project, User
+from web_forum.models import Discussion
 
+# admin.site.register(Type)
+#
+# admin.site.register(Status)
+#
+# admin.site.register(Task)
+#
+# admin.site.register(Project)
 
-admin.site.register(Type)
-
-admin.site.register(Status)
-
-admin.site.register(Task)
-
-admin.site.register(Project)
-
+admin.site.register(Discussion)

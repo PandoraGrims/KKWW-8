@@ -18,7 +18,7 @@ def login_view(request):
             next = request.GET.get("next")
             if next:
                 return redirect(next)
-            return redirect('webapp:index')
+            return redirect('web_forum:index')
         else:
             context['has_error'] = True
     return render(request, 'login.html', context=context)
@@ -26,7 +26,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('webapp:index')
+    return redirect('web_forum:index')
 
 
 class RegisterView(CreateView):
@@ -44,6 +44,6 @@ class RegisterView(CreateView):
         if not next_url:
             next_url = self.request.POST.get('next')
         if not next_url:
-            next_url = reverse('webapp:index')
+            next_url = reverse('web_forum:index')
         return next_url
 
