@@ -6,7 +6,6 @@ from django.contrib.auth.forms import UserCreationForm
 
 class MyUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, label='Имя')
-    last_name = forms.CharField(max_length=30, required=False, label='Фамилия')
     email = forms.EmailField(required=True, label='Email')
 
     def clean(self):
@@ -20,5 +19,5 @@ class MyUserCreationForm(UserCreationForm):
         return cleaned_data
 
     class Meta(UserCreationForm.Meta):
-        fields = ['username', 'first_name', 'last_name', 'email']
+        fields = ['username', 'last_name', 'email']
 

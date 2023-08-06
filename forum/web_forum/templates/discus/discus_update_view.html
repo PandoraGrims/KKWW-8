@@ -2,7 +2,7 @@
 {% block link %}
     {% if request.user.is_authenticated %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url "webapp:project_add" %}">Создание проекта</a>
+        <a class="nav-link" href="{% url "web_forum:project_add" %}">Создание проекта</a>
     </li>
     {% endif %}
 {% endblock %}

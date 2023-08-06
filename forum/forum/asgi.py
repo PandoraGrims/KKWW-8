@@ -1,5 +1,5 @@
 """
-ASGI config for forum project.
+ASGI config for forum discus.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

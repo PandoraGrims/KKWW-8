@@ -1,5 +1,5 @@
 """
-WSGI config for forum project.
+WSGI config for forum discus.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
