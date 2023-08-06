@@ -1,13 +1,13 @@
 from django.urls import path
 
-from web_forum.views.tasks_view import DiscusListView, DiscusDetailView
+from web_forum.views.tasks_view import DiscusListView, DiscusDetailView, DiscusUpdateView
 app_name = "web_forum"
 
 urlpatterns = [
     path('', DiscusListView.as_view(), name="index"),
     path('projects/<int:pk>', DiscusDetailView.as_view(), name="discus_detail_view"),
     # path('discus/add/', ProjectCreateView.as_view(), name="project_add"),
-    # path('discus/<int:pk>/update', ProjectUpdateView.as_view(), name="project_update_view"),
+    path('discus/<int:pk>/update', DiscusUpdateView.as_view(), name="discus_update_view"),
     # path('discus/<int:pk>/delete', ProjectDeleteView.as_view(), name="project_delete_view"),
     # path('discus/<int:pk>/answers/add/', TaskCreateView.as_view(), name="task_add"),
     # path('answers/<int:pk>', TaskDetailView.as_view(), name="task_view"),

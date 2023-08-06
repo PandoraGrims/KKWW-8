@@ -20,4 +20,4 @@ class MyUserCreationForm(UserCreationForm):
         return cleaned_data
 
     class Meta(UserCreationForm.Meta):
-        fields = ['username', 'last_name', 'email']
+        fields = ['username', 'last_name', 'avatar_url', 'email']

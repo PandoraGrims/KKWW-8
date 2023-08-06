@@ -60,6 +60,8 @@ class DiscusDetailView(DetailView):
         answers = discus.answers.all()
         context['answers'] = answers
         return context
+
+
 #
 #
 # class ProjectCreateView(LoginRequiredMixin, CreateView):
@@ -71,13 +73,13 @@ class DiscusDetailView(DetailView):
 #         return reverse("web_forum:project_detail_view", kwargs={"pk": self.object.pk})
 #
 #
-# class ProjectUpdateView(LoginRequiredMixin, UpdateView):
-#     model = Project
-#     form_class = ProjectForm
-#     template_name = "discus/discus_update_view.html"
-#
-#     def get_success_url(self):
-#         return reverse("web_forum:project_detail_view", kwargs={"pk": self.object.pk})
+class DiscusUpdateView(LoginRequiredMixin, UpdateView):
+    model = Discussion
+    form_class = DiscussionForm
+    template_name = "discus/discus_update_view.html"
+
+    def get_success_url(self):
+        return reverse("web_forum:discus_detail_view", kwargs={"pk": self.object.pk})
 #
 #
 # class ProjectDeleteView(LoginRequiredMixin, DeleteView):
