@@ -54,12 +54,12 @@ class DiscusDetailView(DetailView):
     def get_success_url(self):
         return reverse("web_forum:discus_detail_view", kwargs={"pk": self.object.pk})
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     discus = self.get_object()
-    #     answers = discus.answers.all()
-    #     context['answers'] = answers
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        discus = self.get_object()
+        answers = discus.answers.all()
+        context['answers'] = answers
+        return context
 #
 #
 # class ProjectCreateView(LoginRequiredMixin, CreateView):

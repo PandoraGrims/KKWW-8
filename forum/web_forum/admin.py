@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from web_forum.models import Discussion
+from web_forum.models import Discussion, Answer
 
 # admin.site.register(Type)
 #
@@ -11,3 +11,5 @@ from web_forum.models import Discussion
 # admin.site.register(Project)
 
 admin.site.register(Discussion)
+
+admin.site.register(Answer)
