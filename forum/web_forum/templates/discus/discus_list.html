@@ -25,6 +25,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ discus.created_at }}</h5>
                             <p class="card-text">{{ user }}</p>
+                            <p>Количество ответов: {{ discus.answers.all|length }}</p>
                             <a href="{% url "web_forum:discus_detail_view" discus.pk %}" class="btn btn-primary">Посмотреть</a>
                         </div>
                     </div>
