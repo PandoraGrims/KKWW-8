@@ -38,16 +38,11 @@
 
                 <p class="card-text"><small class="text-body-secondary">Добавлено: {{ discus.created_at }}</small>
                 </p>
-
-                {#                {% if request.user.is_authenticated %}#}
-                {#                    <a class="card-link pt-3 pt-4 pb-3" href="{% url "web_forum:discus_update_view" project.pk %}"#}
-                {#                       style="border-top: 3px solid darkblue;border-radius: 5%">#}
-                {#                        <button type="submit"#}
-                {#                                class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">#}
-                {#                            Редактирование#}
-                {#                        </button>#}
-                {#                    </a>#}
-                {#                {% endif %}#}
+                {% if request.user.is_authenticated %}
+                    <div class="obertka py-3">
+                        <a href="{% url "web_forum:discus_update_view" discus.pk %}" class="btn btn-primary py-2 w-25">Редактирование</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -67,9 +62,6 @@
         <div class="container-our-works pb-5 pt-5">
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 {% for answer in answers %}
-
-
-
                     <div class="card w-100" style="border: 3px solid #1395a9; background-color: #ce1565">
                         <div class="card-body ">
                             <img src="{{ request.user.avatar }}" class="img-fluid " alt="User Avatar">
@@ -80,31 +72,6 @@
                             <p class="card-text card-text-1 text-uppercase"
                                style="font-size: 24px; border-top: 3px solid darkblue; border-radius: 10%;">{{ answer.created_at }}</p>
                         </div>
-
-                        {#                            <a class="card-link pt-3 pb-3" href="{% url "web_forum:task_view" task.pk %}"#}
-                        {#                               style="border-top: 3px solid darkblue;border-radius: 10%; background-color: darkcyan">#}
-                        {#                                <button type="submit"#}
-                        {#                                        class="btn btm-input btn-outline-warning btn-lg py-2  text-uppercase rounded-0">#}
-                        {#                                    Детальный просмотр задачи#}
-                        {#                                </button>#}
-                        {#                            </a>#}
-                                                    {% if request.user.is_authenticated %}
-                                                        <a class="card-link pt-3 pb-3" href="{% url "web_forum:discus_update_view" discus.pk %}"
-                                                           style="border-top: 3px solid darkblue;border-radius: 10%; background-color: darkcyan">
-                                                            <button type="submit"
-                                                                    class="btn btm-input btn-outline-warning btn-md py-2  text-uppercase rounded-0">
-                                                                Редактирование
-                                                            </button>
-                                                        </a>
-                        {#                                <a class="card-link pt-3 pb-3" href="{% url "web_forum:task_delete_view" task.pk %}"#}
-                        {#                                   style="border-top: 3px solid darkblue;border-radius: 10%; background-color: darkcyan">#}
-                        {#                                    <button type="submit"#}
-                        {#                                            class="btn btm-input btn-outline-warning btn-md py-2  text-uppercase rounded-0">#}
-                        {#                                        Удаление задачи#}
-                        {#                                    </button>#}
-                        {#                                </a>#}
-                                                    {% endif %}
-
                     </div>
                 {% endfor %}
             </div>

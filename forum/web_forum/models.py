@@ -5,10 +5,10 @@ from django.utils import timezone
 
 
 class Discussion(models.Model):
-    title = models.CharField(max_length=50, verbose_name="Название", unique=True, null=False, blank=False)
+    title = models.CharField(max_length=100, verbose_name="Название", unique=True, null=False, blank=False)
     author = models.ForeignKey(get_user_model(), on_delete=models.SET_DEFAULT,
                                default=1, related_name="discussions", verbose_name="Автор")
-    description = models.TextField(max_length=2000, verbose_name="Описание", null=False, blank=False)
+    description = models.TextField(max_length=200, verbose_name="Описание", null=False, blank=False)
     created_at = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
 
     def str(self):
@@ -21,8 +21,8 @@ class Discussion(models.Model):
 
 
 class Answer(models.Model):
-    name = models.CharField(max_length=50, null=False, blank=False, verbose_name='Имя комментатора')
-    description = models.TextField(max_length=2000, verbose_name="Описание", null=False, blank=False)
+    name = models.CharField(max_length=100, null=False, blank=False, verbose_name='Имя комментатора')
+    description = models.TextField(max_length=200, verbose_name="Описание", null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     discussion = models.ForeignKey(Discussion, on_delete=models.CASCADE, related_name='answers',
                                    verbose_name='Дискуссия')

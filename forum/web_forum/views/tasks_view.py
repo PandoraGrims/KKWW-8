@@ -67,7 +67,7 @@ class DiscusDetailView(DetailView):
 # class ProjectCreateView(LoginRequiredMixin, CreateView):
 #     model = Project
 #     form_class = ProjectForm
-#     template_name = "discus/project_create_view.html"
+#     template_name = "discus/discus_create_view.html"
 #
 #     def get_success_url(self):
 #         return reverse("web_forum:project_detail_view", kwargs={"pk": self.object.pk})
