@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import widgets
 
-from web_forum.models import Discussion
+from web_forum.models import Discussion, Answer
 from django.contrib.auth.models import User
 
 
@@ -41,4 +41,20 @@ class DiscussionForm(forms.ModelForm):
 
     class Meta:
         model = Discussion
-        fields = ["title", "description", "author", "created_at"]
+        fields = ["title", "author", "description", "created_at"]
+
+
+class AnswerForm(forms.ModelForm):
+    name = forms.CharField(max_length=100, required=True, label="Имя")
+    description = forms.CharField(max_length=200, required=True, label="Описание")
+
+    def init(self, *args, **kwargs):
+        super().init(*args, **kwargs)
+
+        for v in self.visible_fields():
+            if not isinstance(v.field.widget, widgets.CheckboxSelectMultiple):
+                v.field.widget.attrs["class"] = "form-control"
+
+    class Meta:
+        model = Answer
+        fields = ["name", "description", "created_at", "discussion"]

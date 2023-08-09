@@ -33,9 +33,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url "accounts:logout" %}">Выход</a>
                         </li>
-                        <li class="nav-item" style="color: aliceblue">
+                        <div class="hello_chel" style="color: darkorange; margin-left: 200px;">
                             <p>Здравствуйте {{ request.user.username }}</p>
-                        </li>
+                        </div>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link"
