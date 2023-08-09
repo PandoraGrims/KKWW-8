@@ -81,12 +81,21 @@
             </div>
         </div>
     </div>
-    <div class="container text-center">
-        <div class="page_footer">
-            {% if is_paginated %}
-                {% include 'answers/pagination.html' %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if answers.has_previous %}
+                <a href="?page=1">&laquo; Первый</a>
+                <a href="?page={{ answers.previous_page_number }}">Предыдущий</a>
             {% endif %}
-        </div>
-    </div>
 
+            <span class="current">
+                Page {{ answers.number }} of {{ answers.paginator.num_pages }}.
+            </span>
+
+            {% if answers.has_next %}
+                <a href="?page={{ answers.next_page_number }}">Следующий</a>
+                <a href="?page={{ answers.paginator.num_pages }}">Последний &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 {% endblock %}

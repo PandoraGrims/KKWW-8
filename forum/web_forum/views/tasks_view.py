@@ -1,13 +1,14 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.shortcuts import redirect, get_object_or_404, reverse
 from django.db.models import Q
-from django.urls import reverse_lazy
+from django.core import paginator
+from django.core.paginator import Paginator
+from django.utils.decorators import method_decorator
 from django.utils.html import urlencode
 from web_forum.form import SearchForm, DiscussionForm, AnswerForm
 from web_forum.models import Discussion, Answer
-from django.contrib.auth.models import User
-from django.views import View
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 class DiscusListView(ListView):
@@ -15,7 +16,7 @@ class DiscusListView(ListView):
     template_name = 'discus/discus_list.html'
     context_object_name = 'discussions'
     ordering = ("-created_at",)
-    paginate_by = 5
+    paginate_by = 4
 
     def dispatch(self, request, *args, **kwargs):
         self.form = self.get_search_form()
@@ -50,6 +51,7 @@ class DiscusDetailView(DetailView):
     model = Discussion
     template_name = 'discus/discus_detail_view.html'
     context_object_name = 'discus'
+    answers_paginate_by = 4
 
     def get_success_url(self):
         return reverse("web_forum:discus_detail_view", kwargs={"pk": self.object.pk})
@@ -57,8 +59,13 @@ class DiscusDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         discus = self.get_object()
-        answers = discus.answers.all()
-        context['answers'] = answers
+
+        answers = discus.answers.all().order_by('-created_at')
+        paginator = Paginator(answers, self.answers_paginate_by)
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        context['answers'] = page_obj
         return context
 
 
