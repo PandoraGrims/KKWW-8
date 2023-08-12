@@ -1,10 +1,10 @@
 {% extends "base_html_my.html" %}
 {% block link %}
-        {% if request.user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link" href="{% url "web_forum:discus_add" %}">Новое обсуждение</a>
-            </li>
-        {% endif %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "web_forum:discus_add" %}">Новое обсуждение</a>
+        </li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -21,19 +21,21 @@
             <div class="row row-cols-1 row-cols-md-2 g-4">
                 {% for discus in discussions %}
 
-                        <a href="{% url "web_forum:discus_detail_view" discus.pk %}"
-                           style="color: black; text-decoration: none">
-                            <div class="card w-100" style="border: 3px solid #1395a9; background-color: #ce1565">
-                                <h2 class="card-header">{{ discus.title }}</h2>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ discus.created_at }}</h5>
-                                    <p class="card-text">{{ request.user }}</p>
-                                    <p>Количество ответов: {{ discus.answers.all|length }}</p>
-                                    <a href="{% url "web_forum:discus_detail_view" discus.pk %}"
-                                       class="btn btn-primary">Посмотреть</a>
-                                </div>
+                    <a href="{% url "web_forum:discus_detail_view" discus.pk %}"
+                       style="color: black; text-decoration: none">
+                        <div class="card w-100" style="border: 3px solid #1395a9; background-color: #ce1565">
+                            <h2 class="card-header">{{ discus.title }}</h2>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ discus.created_at }}</h5>
+
+                                <p class="card-text">{{ discus.author }}</p>
+
+                                <p>Количество ответов: {{ discus.answers.all|length }}</p>
+                                <a href="{% url "web_forum:discus_detail_view" discus.pk %}"
+                                   class="btn btn-primary">Посмотреть</a>
                             </div>
-                        </a>
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
         </div>

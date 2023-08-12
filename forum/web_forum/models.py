@@ -2,11 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 from django.utils import timezone
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='avatars/')
 
 
 class Discussion(models.Model):
     title = models.CharField(max_length=100, verbose_name="Название", unique=True, null=False, blank=False)
-    author = models.ForeignKey(get_user_model(), on_delete=models.SET_DEFAULT,
+    author = models.ForeignKey(User, on_delete=models.SET_DEFAULT,
                                default=1, related_name="discussions", verbose_name="Автор")
     description = models.TextField(max_length=200, verbose_name="Описание", null=False, blank=False)
     created_at = models.DateTimeField(default=timezone.now, verbose_name="Дата создания")
