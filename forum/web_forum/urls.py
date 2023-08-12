@@ -1,5 +1,5 @@
 from django.urls import path
-from web_forum.views.tasks_view import DiscusListView, DiscusDetailView, DiscusUpdateView, DiscusCreateView, \
+from web_forum.views.discus_view import DiscusListView, DiscusDetailView, DiscusUpdateView, DiscusCreateView, \
     AnswerCreateView, UserProfileDetailView
 
 app_name = "web_forum"
