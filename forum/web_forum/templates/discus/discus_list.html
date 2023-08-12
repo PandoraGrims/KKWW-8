@@ -4,6 +4,9 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url "web_forum:discus_add" %}">Новое обсуждение</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'web_forum:user_profile' %}">Личный кабинет</a>
+        </li>
     {% endif %}
 {% endblock %}
 
@@ -14,7 +17,7 @@
         <h2>╰────────╮• ✻ •╭────────╯</h2>
     </div>
     <br>
-    {% include "search_form.html" %}
+
 
     <div class="container text-start">
         <div class="container-our-works pb-5 pt-5">

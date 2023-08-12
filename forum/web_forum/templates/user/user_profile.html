@@ -1,0 +1,13 @@
+{% extends 'base_html_my.html' %}
+
+{% block content %}
+  <h1>{{ user_profile.username }} - Личный кабинет</h1>
+  <p>Всего комментариев: {{ total_answers }}</p>
+  
+  <h2>Обсуждения</h2>
+  <ul>
+    {% for discus in discussions %}
+      <li><a href="{% url 'web_forum:discus_detail_view' discus.id %}">{{ discus.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

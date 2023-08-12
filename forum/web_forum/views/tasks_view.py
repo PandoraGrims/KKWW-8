@@ -1,13 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, get_object_or_404, reverse
-from django.db.models import Q
-from django.core import paginator
-from django.core.paginator import Paginator
-from django.utils.decorators import method_decorator
-from django.utils.html import urlencode
-from web_forum.form import SearchForm, DiscussionForm, AnswerForm
-from web_forum.models import Discussion, Answer
 
+from django.core.paginator import Paginator
+
+from web_forum.form import DiscussionForm, AnswerForm
+from web_forum.models import Discussion, Answer
+from django.http import Http404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
@@ -17,34 +16,6 @@ class DiscusListView(ListView):
     context_object_name = 'discussions'
     ordering = ("-created_at",)
     paginate_by = 4
-
-    def dispatch(self, request, *args, **kwargs):
-        self.form = self.get_search_form()
-        self.search_value = self.get_search_value()
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=None, **kwargs)
-        context["form"] = self.form
-        if self.search_value:
-            context["query"] = urlencode({'search': self.search_value})
-            context["search_value"] = self.search_value
-        return context
-
-    def get_search_form(self):
-        return SearchForm(self.request.GET)
-
-    def get_search_value(self):
-        if self.form.is_valid():
-            return self.form.cleaned_data['search']
-        return None
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        search_value = self.request.GET.get('search')
-        if search_value:
-            queryset = queryset.filter(Q(name__icontains=search_value) | Q(description__icontains=search_value))
-        return queryset
 
 
 class DiscusDetailView(DetailView):
@@ -87,8 +58,27 @@ class DiscusUpdateView(LoginRequiredMixin, UpdateView):
         return reverse("web_forum:discus_detail_view", kwargs={"pk": self.object.pk})
 
 
-#
-#
+class UserProfileDetailView(DetailView):
+    model = User
+    template_name = 'user/user_profile.html'
+    context_object_name = 'user_profile'
+
+    def get_object(self, queryset=None):
+        if not self.request.user.is_authenticated:
+            raise Http404
+        return get_object_or_404(User, pk=self.request.user.pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        discussions = Discussion.objects.filter(author=user)
+        total_answers = Answer.objects.filter(discussion__author=user).count()
+
+        context['discussions'] = discussions
+        context['total_answers'] = total_answers
+        return context
+
 # class ProjectDeleteView(LoginRequiredMixin, DeleteView):
 #     model = Project
 #     template_name = "discus/project_delete_view.html"
@@ -149,7 +139,7 @@ class AnswerCreateView(LoginRequiredMixin, CreateView):
 # class TaskUpdateView(LoginRequiredMixin, UpdateView):
 #     model = Task
 #     form_class = TaskForm
-#     template_name = "answers/update_task.html"
+#     template_name = "answers/update_answer.html"
 #     success_url = reverse_lazy("web_forum:task_view")
 #
 #     def get_success_url(self):
@@ -158,7 +148,7 @@ class AnswerCreateView(LoginRequiredMixin, CreateView):
 #
 # class TaskDeleteView(LoginRequiredMixin, DeleteView):
 #     model = Task
-#     template_name = "answers/delete_task.html"
+#     template_name = "answers/delete_answer.html"
 #     success_url = reverse_lazy("web_forum:index")
 #
 #

@@ -24,10 +24,6 @@ class UserForm(forms.Form):
         user_exists = User.objects.filter(username=username).exists()
 
 
-class SearchForm(forms.Form):
-    search = forms.CharField(max_length=100, required=False, label="Найти")
-
-
 class DiscussionForm(forms.ModelForm):
     title = forms.CharField(max_length=100, required=True, label="Название")
     description = forms.CharField(max_length=200, required=True, label="Описание")

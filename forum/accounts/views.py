@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
 from django.urls import reverse
-
 from accounts.forms import MyUserCreationForm
 
 
@@ -46,4 +45,3 @@ class RegisterView(CreateView):
         if not next_url:
             next_url = reverse('web_forum:index')
         return next_url
-
