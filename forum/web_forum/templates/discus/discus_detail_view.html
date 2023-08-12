@@ -1,22 +1,13 @@
 {% extends "base_html_my.html" %}
 {% block link %}
-    {#    {% if request.user.is_authenticated %}#}
-    {#        <li class="nav-item">#}
-    {#            <a class="nav-link" href="{% url "web_forum:project_add" %}">Создание Проекта</a>#}
-    {#        </li>#}
-    {#        <li class="nav-item">#}
-    {#            <a class="nav-link" href="{% url "web_forum:project_delete_view" project.pk %}">Удалить Проект</a>#}
-    {#        </li>#}
-    {#        <li class="nav-item">#}
-    {#            <a class="nav-link" href="{% url "web_forum:discus_update_view" project.pk %}">Редактировать проект</a>#}
-    {#        </li>#}
-    {#        <li class="nav-item">#}
-    {#            <a class="nav-link" href="{% url "web_forum:task_add" project.pk %}">Добавить задачу</a>#}
-    {#        </li>#}
-    {#        <li class="nav-item">#}
-    {#            <a class="nav-link" href="{% url "web_forum:add_user_to_project" project.pk %}"> Добавить к проекту</a>#}
-    {#        </li>#}
-    {#    {% endif %}#}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "web_forum:discus_delete_view" discus.pk %}">Удалить Проект</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "web_forum:discus_update_view" discus.pk %}">Редактировать проект</a>
+        </li>
+    {% endif %}
 {% endblock %}
 
 {% block title %}Детали Проекта{% endblock %}

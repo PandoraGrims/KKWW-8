@@ -12,6 +12,6 @@ urlpatterns = [
     path('discus/<int:pk>/delete', DiscusDeleteView.as_view(), name="discus_delete_view"),
     path('discus/<int:pk>/answers/add/', AnswerCreateView.as_view(), name="answer_add"),
     path('profile/', UserProfileDetailView.as_view(), name='user_profile'),
-    path('answers/<int:pk>/update', AnswerUpdateView.as_view(), name="answer_update_view"),
-    path('answers/<int:pk>/delete', AnswerDeleteView.as_view(), name="answer_delete_view"),
+    path('answer/<int:pk>/update', AnswerUpdateView.as_view(), name="answer_update_view"),
+    path('answer/<int:pk>/delete', AnswerDeleteView.as_view(), name="answer_delete_view"),
 ]
